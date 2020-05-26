@@ -72,7 +72,7 @@ Let's now see a sample of the first 5 rows of the feature set and a brief descri
 
 
 ```python
-# pd.set_option("display.max_columns", None)
+pd.set_option("display.max_columns", None)
 X_raw.head()
 ```
 
@@ -293,7 +293,7 @@ msno.matrix(X_raw.sample(250))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x2620ce18588>
+    <matplotlib.axes._subplots.AxesSubplot at 0x18b2e08b9c8>
 
 
 
@@ -326,15 +326,12 @@ Now, we need to convert some data types that are not the most appropriate for ML
 
 
 ```python
-try:
-    today = dt.today()
-    X.amenities = X.amenities.str.split(",").apply(len)
-    X[["first_review", "last_review", "host_since"]] = X[["first_review", "last_review", "host_since"]].apply(lambda col: col.apply(lambda x: (today-dt.fromisoformat(x)).days if x!=0 else x))
-    X.host_response_rate = X.host_response_rate.str.replace("%", "").astype(int)
-    X[["host_has_profile_pic", "host_identity_verified", "instant_bookable"]] = X[["host_has_profile_pic", "host_identity_verified", "instant_bookable"]].apply(lambda col: col.apply(lambda x: 1 if x == "t" else 0))
-    X.cleaning_fee = X.cleaning_fee.apply(lambda x: 1 if x==True else 0)
-except:
-    pass
+today = dt.today()
+X.amenities = X.amenities.str.split(",").apply(len)
+X[["first_review", "last_review", "host_since"]] = X[["first_review", "last_review", "host_since"]].apply(lambda col: col.apply(lambda x: (today-dt.fromisoformat(x)).days if x!=0 else x))
+X.host_response_rate = X.host_response_rate.str.replace("%", "").astype(int)
+X[["host_has_profile_pic", "host_identity_verified", "instant_bookable"]] = X[["host_has_profile_pic", "host_identity_verified", "instant_bookable"]].apply(lambda col: col.apply(lambda x: 1 if x == "t" else 0))
+X.cleaning_fee = X.cleaning_fee.apply(lambda x: 1 if x==True else 0)
 ```
 
 Let's now explore the data a little more:
@@ -419,13 +416,13 @@ X.describe()
       <td>3.160888</td>
       <td>1.236039</td>
       <td>0.734884</td>
-      <td>1245.613123</td>
+      <td>1249.543525</td>
       <td>0.996956</td>
       <td>0.673263</td>
       <td>71.252708</td>
-      <td>2127.792971</td>
+      <td>2132.792971</td>
       <td>0.263023</td>
-      <td>914.164517</td>
+      <td>918.097025</td>
       <td>38.441312</td>
       <td>-92.441681</td>
       <td>20.889425</td>
@@ -443,13 +440,13 @@ X.describe()
       <td>2.156297</td>
       <td>0.582947</td>
       <td>0.441398</td>
-      <td>782.083154</td>
+      <td>783.787542</td>
       <td>0.055092</td>
       <td>0.469023</td>
       <td>42.988835</td>
       <td>659.296636</td>
       <td>0.440278</td>
-      <td>517.884554</td>
+      <td>519.769529</td>
       <td>3.081897</td>
       <td>21.711043</td>
       <td>37.818332</td>
@@ -471,7 +468,7 @@ X.describe()
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>960.000000</td>
+      <td>965.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>33.338905</td>
@@ -491,13 +488,13 @@ X.describe()
       <td>2.000000</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>1013.000000</td>
+      <td>1018.000000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>1611.000000</td>
+      <td>1616.000000</td>
       <td>0.000000</td>
-      <td>966.000000</td>
+      <td>971.000000</td>
       <td>34.126898</td>
       <td>-118.342867</td>
       <td>1.000000</td>
@@ -515,13 +512,13 @@ X.describe()
       <td>2.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>1343.000000</td>
+      <td>1348.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>100.000000</td>
-      <td>2059.000000</td>
+      <td>2064.000000</td>
       <td>0.000000</td>
-      <td>1033.000000</td>
+      <td>1038.000000</td>
       <td>40.661481</td>
       <td>-76.998494</td>
       <td>6.000000</td>
@@ -539,13 +536,13 @@ X.describe()
       <td>4.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>1703.000000</td>
+      <td>1708.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>100.000000</td>
-      <td>2582.000000</td>
+      <td>2587.000000</td>
       <td>1.000000</td>
-      <td>1154.000000</td>
+      <td>1159.000000</td>
       <td>40.746124</td>
       <td>-73.954688</td>
       <td>23.000000</td>
@@ -563,13 +560,13 @@ X.describe()
       <td>16.000000</td>
       <td>8.000000</td>
       <td>1.000000</td>
-      <td>4203.000000</td>
+      <td>4208.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>100.000000</td>
-      <td>4462.000000</td>
+      <td>4467.000000</td>
       <td>1.000000</td>
-      <td>4138.000000</td>
+      <td>4143.000000</td>
       <td>42.390437</td>
       <td>-70.985047</td>
       <td>605.000000</td>
@@ -591,16 +588,16 @@ There doesn't seem to be any anomalous value for the numeric features. Now, the 
 
 
 ```python
-try:
-    one_hot = pd.get_dummies(X[["property_type", "room_type", "bed_type", "cancellation_policy", "city", "neighbourhood"]], drop_first = True)
-    X.drop(columns = ["property_type", "room_type", "bed_type", "cancellation_policy", "city", "neighbourhood"], inplace = True)
-    X[one_hot.columns] = one_hot
-except:
-    pass
+one_hot = pd.get_dummies(X[["property_type", "room_type", "bed_type", "cancellation_policy", "city", "neighbourhood"]], drop_first = True)
+X.drop(columns = ["property_type", "room_type", "bed_type", "cancellation_policy", "city", "neighbourhood"], inplace = True)
+X[one_hot.columns] = one_hot
 
 print(X.shape)
 X.head()
 ```
+
+    (73579, 688)
+    
 
 
 
@@ -1320,13 +1317,13 @@ X.head()
       <td>3</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1433</td>
+      <td>1438</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>2978</td>
+      <td>2983</td>
       <td>0</td>
-      <td>1403</td>
+      <td>1408</td>
       <td>40.696524</td>
       <td>-73.991617</td>
       <td>2</td>
@@ -2011,13 +2008,13 @@ X.head()
       <td>7</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1020</td>
+      <td>1025</td>
       <td>1</td>
       <td>0</td>
       <td>100</td>
-      <td>1067</td>
+      <td>1072</td>
       <td>1</td>
-      <td>971</td>
+      <td>976</td>
       <td>40.766115</td>
       <td>-73.989040</td>
       <td>6</td>
@@ -2702,13 +2699,13 @@ X.head()
       <td>5</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1117</td>
+      <td>1122</td>
       <td>1</td>
       <td>1</td>
       <td>100</td>
-      <td>1304</td>
+      <td>1309</td>
       <td>1</td>
-      <td>980</td>
+      <td>985</td>
       <td>40.808110</td>
       <td>-73.943756</td>
       <td>10</td>
@@ -3397,7 +3394,7 @@ X.head()
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>1859</td>
+      <td>1864</td>
       <td>0</td>
       <td>0</td>
       <td>37.772004</td>
@@ -4084,13 +4081,13 @@ X.head()
       <td>2</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1836</td>
+      <td>1841</td>
       <td>1</td>
       <td>1</td>
       <td>100</td>
-      <td>1908</td>
+      <td>1913</td>
       <td>1</td>
-      <td>1215</td>
+      <td>1220</td>
       <td>38.925627</td>
       <td>-77.034596</td>
       <td>4</td>
@@ -4795,7 +4792,7 @@ y.mean()
 
 
 
-    4.782069108304868
+    4.78289006490994
 
 
 
@@ -4805,9 +4802,11 @@ For this problem, the baseline model is to always predict 4.78 as the log of the
 
 
 ```python
+import multiprocessing as mp
 from sklearn.linear_model import LinearRegression as LR
 from sklearn.model_selection import cross_validate
 import statsmodels.api as sm
+from statsmodels.stats.outliers_influence import variance_inflation_factor as vif
 ```
 
 Let's first try a simple linear regression model without droping any features. Due to the increased number of columns, we will probably overfit the data.
@@ -4820,11 +4819,11 @@ print("R²: " + str(results["train_score"].mean()))
 print("OSR²: " + str(results["test_score"].mean()))
 ```
 
-    R²: 0.6800847075976495
-    OSR²: 0.6687950671729729
+    R²: 0.6800847075976497
+    OSR²: 0.6687950671729456
     
 
-We can see a small difference between the R² (training set) and the Out-of-Sample R² (test set) due to overfitting. This gap can be reduced by removing some irrelevant features from the dataset. In order to select the features, I'll analyze the p-values of each feature (probability that the true coefficient is zero) and remove the ones with p-value > 5%
+We can see a difference between the R² (training set) and the Out-of-Sample R² (test set) due to overfitting, although I was expecting a larger difference. This gap can be reduced by removing some irrelevant features from the dataset. In order to select the features, I'll analyze the p-values of each feature (probability that the true coefficient is zero) and remove the ones with p-value > 5%
 
 
 ```python
@@ -4898,20 +4897,332 @@ print("R²: " + str(results["train_score"].mean()))
 print("OSR²: " + str(results["test_score"].mean()))
 ```
 
-    R²: 0.67572584916069
-    OSR²: 0.6701256889947453
+    R²: 0.6757257753871935
+    OSR²: 0.6701256188899569
     
 
-Indeed, the gap between the training and test scores decreased a little. That's because those irrelevant features were probably correlated with other features, which breaks one of the assumptions of the linear regression model.
+Indeed, the gap between the training and test scores decreased a little. That's because those irrelevant features were probably adding noise to the predictions.
+
+Now that we selected the relevant features for the model, we can compute the final score with the test set:
+
+
+```python
+lrm.fit(X_train[relevant_columns], y_train)
+lrm_score = lrm.score(X_test[relevant_columns], y_test)
+lrm_score
+```
+
+
+
+
+    0.6536678845224256
+
+
 
 ## Second model: Decision Tree
 
-COMING SOON ...
+The linear regression model has very strong assumptions about the data, which usually don't always hold. Decision Trees, however, are non-parametric models with more flexibility to fit the data, although they are more prone to overfitting.
+
+In order to reduce overfitting, I'm going to train a large decision tree (until we have 1 sample per leaf node) and then I'm going to prune the tree with the complexity parameter cp. This parameter will be chosen through 5-fold cross-validation.
+
+
+```python
+from sklearn.tree import DecisionTreeRegressor as DTR
+from sklearn.tree import plot_tree
+from tqdm import tqdm
+from matplotlib import pyplot as plt
+```
+
+
+```python
+train_scores = []
+val_scores = []
+cps = []
+for cp in tqdm([0,0.00005,0.0001,0.0005,0.001]):
+    cps.append(cp)
+    dtr = DTR(ccp_alpha=cp)
+    results = cross_validate(dtr, X_train[relevant_columns], y_train, cv=5, return_train_score = True)
+    train_scores.append(results["train_score"].mean())
+    val_scores.append(results["test_score"].mean())
+```
+
+    100%|██████████| 5/5 [03:55<00:00, 47.15s/it]
+    
+
+
+```python
+ax=plt.plot(cps, val_scores)
+ax=plt.plot(cps, train_scores)
+ax=plt.legend(["validation score", "train score"])
+ax=plt.xlabel("cp")
+ax=plt.ylabel("OSR²")
+```
+
+
+![png](output_50_0.png)
+
+
+From the plot above, we can see that cp=0.0001 gives the best OSR² score. Let's now train the Decision Tree algorithm with that cp value.
+
+
+```python
+dtr = DTR(ccp_alpha=0.0001)
+dtr.fit(X_train[relevant_columns], y_train)
+```
+
+
+
+
+    DecisionTreeRegressor(ccp_alpha=0.0001, criterion='mse', max_depth=None,
+                          max_features=None, max_leaf_nodes=None,
+                          min_impurity_decrease=0.0, min_impurity_split=None,
+                          min_samples_leaf=1, min_samples_split=2,
+                          min_weight_fraction_leaf=0.0, presort='deprecated',
+                          random_state=None, splitter='best')
+
+
+
+
+```python
+ft_importance = pd.DataFrame({"feature": relevant_columns, "importance": dtr.feature_importances_}).sort_values("importance", ascending=False).query("importance > 0")
+print(ft_importance.shape[0])
+ft_importance.head(6)
+```
+
+    31
+    
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>37</th>
+      <td>room_type_Private room</td>
+      <td>0.423014</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>bedrooms</td>
+      <td>0.173099</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>room_type_Shared room</td>
+      <td>0.093567</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>longitude</td>
+      <td>0.090133</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>bathrooms</td>
+      <td>0.070387</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>latitude</td>
+      <td>0.055817</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+plt.figure(figsize=(30,30))
+ax = plot_tree(dtr, feature_names = relevant_columns, fontsize=20, max_depth=3)
+```
+
+
+![png](output_54_0.png)
+
+
+The Decision Tree regressor used only 32 of the 282 features available. The room type is the strongest predictor of the price, followed by the number of bedrooms, location (longitude/latitude) and number of bathrooms. This makes a lot of sense. Let's now see the final score on the test set:
+
+
+```python
+dtr_score = dtr.score(X_test[relevant_columns], y_test)
+dtr_score
+```
+
+
+
+
+    0.6165181174356805
+
+
 
 ## Third model: Random Forest
 
-COMING SOON ...
+Although the Decision Tree is more flexible than Linear Regression, it overfits the data more often. Even if we prune the tree, the greedy decisions we make in the beginning of the tree may not be the global optimum. One way to improve that is by training multiple weak trees with a random sample of the features and then combine the results. Each tree will be trained in a bootstrapped dataset from the original training set. This method is called Random Forest.
+
+I'll fix the number of trees at 150 and I will fine tune the % of features used at each split. One of the advantages of Random Forest is that, as we use bootstrapped datasets, we can estimate the error of each row using trees that weren't trained with that row. This is called out-of-bag score, and I'll be using that instead of cross-validation to evaluate the parameters.
+
+
+```python
+from sklearn.ensemble import RandomForestRegressor as RFR
+```
+
+
+```python
+params = []
+oob_scores = []
+for i in tqdm(range(5)):
+    max_ft = 0.4 + i/20
+    params.append(max_ft)
+    rfr = RFR(oob_score = True, max_features = max_ft)
+    rfr.fit(X_train[relevant_columns], y_train)
+    oob_scores.append(rfr.oob_score_)
+```
+
+    100%|██████████| 5/5 [07:02<00:00, 84.41s/it]
+    
+
+
+```python
+ax=plt.plot(params, oob_scores)
+ax=plt.xlabel("% of features")
+ax=plt.ylabel("OOB R²")
+```
+
+
+![png](output_62_0.png)
+
+
+It seems that 45% of features gives us the best oob score. We can also see the feature importances, as we did for the Decision Tree Regressor.
+
+
+```python
+rfr = RFR(max_features = 0.5)
+rfr.fit(X_train[relevant_columns], y_train)
+ft_importance = pd.DataFrame({"feature": relevant_columns, "importance": rfr.feature_importances_}).sort_values("importance", ascending=False).query("importance > 0")
+print(ft_importance.shape[0])
+ft_importance.head(6)
+```
+
+    281
+    
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>importance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>37</th>
+      <td>room_type_Private room</td>
+      <td>0.199795</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>bedrooms</td>
+      <td>0.130747</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>longitude</td>
+      <td>0.098418</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>accommodates</td>
+      <td>0.086509</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>latitude</td>
+      <td>0.083718</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>room_type_Shared room</td>
+      <td>0.056083</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+The top features here are almost the same as before, but we now have *accomodates* in the list and we don't have *bathrooms* anymore. Let's see the final score on the test set:
+
+
+```python
+rfr_score = rfr.score(X_test[relevant_columns], y_test)
+rfr_score
+```
+
+
+
+
+    0.6982681254892729
+
+
 
 ## Conclusion
 
-COMING SOON ...
+A summary of the results obtained by each model can be found here:
+
+
+```python
+print("Linear Regression: " + str(lrm_score))
+print("Decision Tree: " + str(dtr_score))
+print("Random Forest: " + str(rfr_score))
+```
+
+    Linear Regression: 0.6536678845224256
+    Decision Tree: 0.6165181174356805
+    Random Forest: 0.6982681254892729
+    
+
+For this task, the linear regression did a great job and outperformed the decision tree. As said before, the Decision Tree takes greedy decisions on the splits, which are not necessarily the global optimal decisions. On top of that, they easily overfit the data, as small changes in the dataset may completely change the choice of splits. That's why usually Random Forests perform better, as it is more difficult to have high variance over an aggregation of multiple trees.
+
+For this problem of predicting prices, indeed the Random Forest method obtained the best score, an OOSR² of 0.698. This means that around 70% of the original variance in the price is explained by the model, which is a very good result. By using this model, Airbnb could make targeted price recommendations to hosts in order to maximize revenue both for Airbnb and for the host. At the same time, users can use this model to check if the property is overvalued or undervalued with respect to the market.
