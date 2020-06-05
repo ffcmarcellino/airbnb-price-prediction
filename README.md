@@ -64,6 +64,8 @@ y = df["log_price"]
 from sklearn.model_selection import train_test_split
 import missingno as msno
 from datetime import datetime as dt
+import seaborn as sns
+from matplotlib import pyplot as plt
 ```
 
 Before we start fitting models into the data, it is useful to explore the dataset to detect anomalies, handle missing values and preprocess some features.
@@ -293,7 +295,7 @@ msno.matrix(X_raw.sample(250))
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x18b2e08b9c8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x188db1133c8>
 
 
 
@@ -416,13 +418,13 @@ X.describe()
       <td>3.160888</td>
       <td>1.236039</td>
       <td>0.734884</td>
-      <td>1249.543525</td>
+      <td>1256.618247</td>
       <td>0.996956</td>
       <td>0.673263</td>
       <td>71.252708</td>
-      <td>2132.792971</td>
+      <td>2141.792971</td>
       <td>0.263023</td>
-      <td>918.097025</td>
+      <td>925.175539</td>
       <td>38.441312</td>
       <td>-92.441681</td>
       <td>20.889425</td>
@@ -440,13 +442,13 @@ X.describe()
       <td>2.156297</td>
       <td>0.582947</td>
       <td>0.441398</td>
-      <td>783.787542</td>
+      <td>786.859603</td>
       <td>0.055092</td>
       <td>0.469023</td>
       <td>42.988835</td>
       <td>659.296636</td>
       <td>0.440278</td>
-      <td>519.769529</td>
+      <td>523.165589</td>
       <td>3.081897</td>
       <td>21.711043</td>
       <td>37.818332</td>
@@ -468,7 +470,7 @@ X.describe()
       <td>0.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>965.000000</td>
+      <td>974.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
       <td>33.338905</td>
@@ -488,13 +490,13 @@ X.describe()
       <td>2.000000</td>
       <td>1.000000</td>
       <td>0.000000</td>
-      <td>1018.000000</td>
+      <td>1027.000000</td>
       <td>1.000000</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>1616.000000</td>
+      <td>1625.000000</td>
       <td>0.000000</td>
-      <td>971.000000</td>
+      <td>980.000000</td>
       <td>34.126898</td>
       <td>-118.342867</td>
       <td>1.000000</td>
@@ -512,13 +514,13 @@ X.describe()
       <td>2.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>1348.000000</td>
+      <td>1357.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>100.000000</td>
-      <td>2064.000000</td>
+      <td>2073.000000</td>
       <td>0.000000</td>
-      <td>1038.000000</td>
+      <td>1047.000000</td>
       <td>40.661481</td>
       <td>-76.998494</td>
       <td>6.000000</td>
@@ -536,13 +538,13 @@ X.describe()
       <td>4.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
-      <td>1708.000000</td>
+      <td>1717.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>100.000000</td>
-      <td>2587.000000</td>
+      <td>2596.000000</td>
       <td>1.000000</td>
-      <td>1159.000000</td>
+      <td>1168.000000</td>
       <td>40.746124</td>
       <td>-73.954688</td>
       <td>23.000000</td>
@@ -560,13 +562,13 @@ X.describe()
       <td>16.000000</td>
       <td>8.000000</td>
       <td>1.000000</td>
-      <td>4208.000000</td>
+      <td>4217.000000</td>
       <td>1.000000</td>
       <td>1.000000</td>
       <td>100.000000</td>
-      <td>4467.000000</td>
+      <td>4476.000000</td>
       <td>1.000000</td>
-      <td>4143.000000</td>
+      <td>4152.000000</td>
       <td>42.390437</td>
       <td>-70.985047</td>
       <td>605.000000</td>
@@ -1317,13 +1319,13 @@ X.head()
       <td>3</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1438</td>
+      <td>1447</td>
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>2983</td>
+      <td>2992</td>
       <td>0</td>
-      <td>1408</td>
+      <td>1417</td>
       <td>40.696524</td>
       <td>-73.991617</td>
       <td>2</td>
@@ -2008,13 +2010,13 @@ X.head()
       <td>7</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1025</td>
+      <td>1034</td>
       <td>1</td>
       <td>0</td>
       <td>100</td>
-      <td>1072</td>
+      <td>1081</td>
       <td>1</td>
-      <td>976</td>
+      <td>985</td>
       <td>40.766115</td>
       <td>-73.989040</td>
       <td>6</td>
@@ -2699,13 +2701,13 @@ X.head()
       <td>5</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1122</td>
+      <td>1131</td>
       <td>1</td>
       <td>1</td>
       <td>100</td>
-      <td>1309</td>
+      <td>1318</td>
       <td>1</td>
-      <td>985</td>
+      <td>994</td>
       <td>40.808110</td>
       <td>-73.943756</td>
       <td>10</td>
@@ -3394,7 +3396,7 @@ X.head()
       <td>1</td>
       <td>1</td>
       <td>0</td>
-      <td>1864</td>
+      <td>1873</td>
       <td>0</td>
       <td>0</td>
       <td>37.772004</td>
@@ -4081,13 +4083,13 @@ X.head()
       <td>2</td>
       <td>1.0</td>
       <td>1</td>
-      <td>1841</td>
+      <td>1850</td>
       <td>1</td>
       <td>1</td>
       <td>100</td>
-      <td>1913</td>
+      <td>1922</td>
       <td>1</td>
-      <td>1220</td>
+      <td>1229</td>
       <td>38.925627</td>
       <td>-77.034596</td>
       <td>4</td>
@@ -4772,6 +4774,32 @@ X.head()
 
 
 
+Before we start fitting the data into models, it is useful to explore the data to understand its distribution. Here, I'm going to do a pair plot.
+
+
+```python
+sns.set()
+columns = ['amenities','accommodates','first_review','host_response_rate','host_since','last_review','latitude','longitude','number_of_reviews','review_scores_rating','beds']
+df_pp = X[columns]
+df_pp["log_price"] = y
+sns.pairplot(df_pp,size = 2 ,kind ='scatter',diag_kind='kde')
+plt.show()
+```
+
+    C:\Users\felli\anaconda3\lib\site-packages\ipykernel_launcher.py:4: SettingWithCopyWarning: 
+    A value is trying to be set on a copy of a slice from a DataFrame.
+    Try using .loc[row_indexer,col_indexer] = value instead
+    
+    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+      after removing the cwd from sys.path.
+    C:\Users\felli\anaconda3\lib\site-packages\seaborn\axisgrid.py:2079: UserWarning: The `size` parameter has been renamed to `height`; please update your code.
+      warnings.warn(msg, UserWarning)
+    
+
+
+![png](output_27_1.png)
+
+
 Our dataset has now 688 columns and is almost ready to be used. In order to train and evaluate different machine learning models, this dataset must also be split into a training and test datasets. Here, I'm going to use a 80/20 split.
 
 
@@ -4930,7 +4958,6 @@ In order to reduce overfitting, I'm going to train a large decision tree (until 
 from sklearn.tree import DecisionTreeRegressor as DTR
 from sklearn.tree import plot_tree
 from tqdm import tqdm
-from matplotlib import pyplot as plt
 ```
 
 
@@ -4959,7 +4986,7 @@ ax=plt.ylabel("OSR²")
 ```
 
 
-![png](output_50_0.png)
+![png](output_52_0.png)
 
 
 From the plot above, we can see that cp=0.0001 gives the best OSR² score. Let's now train the Decision Tree algorithm with that cp value.
@@ -5061,7 +5088,7 @@ ax = plot_tree(dtr, feature_names = relevant_columns, fontsize=20, max_depth=3)
 ```
 
 
-![png](output_54_0.png)
+![png](output_56_0.png)
 
 
 The Decision Tree regressor used only 32 of the 282 features available. The room type is the strongest predictor of the price, followed by the number of bedrooms, location (longitude/latitude) and number of bathrooms. This makes a lot of sense. Let's now see the final score on the test set:
@@ -5113,7 +5140,7 @@ ax=plt.ylabel("OOB R²")
 ```
 
 
-![png](output_62_0.png)
+![png](output_64_0.png)
 
 
 It seems that 45% of features gives us the best oob score. We can also see the feature importances, as we did for the Decision Tree Regressor.
