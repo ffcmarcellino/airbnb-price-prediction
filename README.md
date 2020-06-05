@@ -84,13 +84,9 @@ X_raw.head()
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+        vertical-align: middle;}
     .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
+        vertical-align: top;}
     .dataframe thead th {
         text-align: right;
     }
@@ -349,13 +345,9 @@ X.describe()
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+        vertical-align: middle;}
     .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
+        vertical-align: top;}
     .dataframe thead th {
         text-align: right;
     }
@@ -607,13 +599,10 @@ X.head()
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
+        vertical-align: middle;}
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
     .dataframe thead th {
         text-align: right;
     }
@@ -5027,11 +5016,9 @@ ft_importance.head(6)
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
     .dataframe thead th {
         text-align: right;
     }
@@ -5165,11 +5152,9 @@ ft_importance.head(6)
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
     .dataframe thead th {
         text-align: right;
     }
